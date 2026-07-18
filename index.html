@@ -36,6 +36,25 @@
   </style>
 </head>
 
+<script>
+  const junoData = {
+    name: "純子さん",
+    lastActivity: "10:30",
+    battery: "72%",
+    lastCharge: "07:15",
+    status: "活動あり"
+  };
+
+  document.querySelector("h2").textContent = junoData.name;
+
+  const information = document.querySelectorAll(".message p");
+
+  information[0].textContent = "最終活動　" + junoData.lastActivity;
+  information[1].textContent = "バッテリー　" + junoData.battery;
+  information[2].textContent = "最終充電　" + junoData.lastCharge;
+  information[3].textContent = "状態　　　" + junoData.status;
+</script>
+
 <body>
   <div class="app">
     <h1>JUNO</h1>
