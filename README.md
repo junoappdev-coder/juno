@@ -1,2 +1,15 @@
-# juno
-A simple app to stay quiently connected with the people who matter.
+# JUNO
+
+大切な人と、そっとつながる。
+
+JUNOは、家族を監視するためではなく、
+必要なときに事実だけを確認できる、
+シンプルな見守りアプリです。
+
+## 基本方針
+
+- 監視しない
+- AIによる評価や推測をしない
+- 事実だけを表示する
+- 一目で状況を確認できる
+- 必要以上の操作を求めない
