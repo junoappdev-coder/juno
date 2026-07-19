@@ -37,22 +37,29 @@
 </head>
 
 <script>
-  const junoData = {
-    name: "純子さん",
-    lastActivity: "10:30",
-    battery: "72%",
-    lastCharge: "07:15",
-    status: "活動あり"
-  };
+  function recordActivity() {
+    const now = new Date();
 
-  document.querySelector("h2").textContent = junoData.name;
+    const time = now.toLocaleTimeString("ja-JP", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
 
-  const information = document.querySelectorAll(".message p");
+    document.getElementById("lastActivity").textContent =
+      "最終活動　" + time;
 
-  information[0].textContent = "最終活動　" + junoData.lastActivity;
-  information[1].textContent = "バッテリー　" + junoData.battery;
-  information[2].textContent = "最終充電　" + junoData.lastCharge;
-  information[3].textContent = "状態　　　" + junoData.status;
+    document.getElementById("status").textContent =
+      "状態　　　活動あり";
+
+    localStorage.setItem("lastActivity", time);
+  }
+
+  const savedActivity = localStorage.getItem("lastActivity");
+
+  if (savedActivity) {
+    document.getElementById("lastActivity").textContent =
+      "最終活動　" + savedActivity;
+  }
 </script>
 
 <body>
