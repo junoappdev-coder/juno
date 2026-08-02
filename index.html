@@ -26,34 +26,52 @@
     h1 {
       font-size: 48px;
       letter-spacing: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: 2px solid #222;
+      background: white;
+      color: #222;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #222;
+      color: white;
     }
 
     .message {
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1.8;
+    }
+
+    .message p {
+      margin: 10px 0;
     }
   </style>
 </head>
 
 <body>
-  <div>
-  <button onclick="record('起床')">起きる</button>
-  <button onclick="record('就寝')">寝る</button>
-</div>
-
-<p id="status">まだ記録がありません</p>
-
-<script>
-function record(type) {
-  const now = new Date();
-  const time = now.toLocaleString('ja-JP');
-  document.getElementById('status').innerText =
-    type + '：' + time;
-}
-</script>
   <div class="app">
     <h1>JUNO</h1>
+    
+    <div class="buttons">
+      <button onclick="record('起床')">起きる</button>
+      <button onclick="record('就寝')">寝る</button>
+    </div>
+
     <div class="message">
       <p id="status">状態　　　待機中</p>
       <p id="lastActivity">最終活動　---</p>
@@ -61,35 +79,40 @@ function record(type) {
   </div>
 
   <script>
-    function recordActivity() {
+    function record(type) {
       const now = new Date();
-
       const time = now.toLocaleTimeString("ja-JP", {
         hour: "2-digit",
         minute: "2-digit"
       });
 
+      // ステータス更新
+      document.getElementById("status").textContent =
+        type + "　　　" + time;
+
       document.getElementById("lastActivity").textContent =
         "最終活動　" + time;
 
-      document.getElementById("status").textContent =
-        "状態　　　活動あり";
-
+      // ローカルストレージに保存
       localStorage.setItem("lastActivity", time);
+      localStorage.setItem("lastStatus", type);
     }
 
+    // ページ読み込み時に保存されたデータを復元
     window.onload = function () {
-      const savedActivity =
-        localStorage.getItem("lastActivity");
+      const savedActivity = localStorage.getItem("lastActivity");
+      const savedStatus = localStorage.getItem("lastStatus");
 
       if (savedActivity) {
         document.getElementById("lastActivity").textContent =
           "最終活動　" + savedActivity;
       }
-    };
 
-    // ページアクセス時に活動を記録
-    recordActivity();
+      if (savedStatus) {
+        document.getElementById("status").textContent =
+          savedStatus + "　　　" + savedActivity;
+      }
+    };
   </script>
 </body>
 </html>
