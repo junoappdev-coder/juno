@@ -37,6 +37,21 @@
 </head>
 
 <body>
+  <div>
+  <button onclick="record('起床')">起きる</button>
+  <button onclick="record('就寝')">寝る</button>
+</div>
+
+<p id="status">まだ記録がありません</p>
+
+<script>
+function record(type) {
+  const now = new Date();
+  const time = now.toLocaleString('ja-JP');
+  document.getElementById('status').innerText =
+    type + '：' + time;
+}
+</script>
   <div class="app">
     <h1>JUNO</h1>
     <div class="message">
